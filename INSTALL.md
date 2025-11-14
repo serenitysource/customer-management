@@ -15,7 +15,7 @@ This guide is for users who have just cloned this repository from GitHub.
 
 ```bash
 git clone <repository-url>
-cd developer_task
+cd customer-management
 ```
 
 ### 2. Run Setup Script
@@ -180,7 +180,7 @@ Changes to Vue components will automatically reload in the browser!
 ## File Structure
 
 ```
-developer_task/
+customer-management/
 ├── app/                    # Laravel application code
 │   ├── Http/Controllers/   # API controllers
 │   ├── Models/            # Eloquent models

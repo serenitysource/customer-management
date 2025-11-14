@@ -83,7 +83,7 @@ Features:
 
 ```powershell
 # Add remote (replace with your actual URL)
-git remote add origin https://github.com/yourusername/slipstream-assessment.git
+git remote add origin https://github.com/yourusername/customer-management.git
 
 # Push commits
 git push -u origin main
@@ -121,13 +121,13 @@ Make sure your repository includes:
 
 Send email to the assessment contact with:
 
-**Subject**: Slipstream Developer Assessment - Completed
+**Subject**: Customer Management System - Completed
 
 **Body**:
 ```
 Hi,
 
-I have completed the Slipstream developer assessment task.
+I have completed the customer management system.
 
 Repository URL: [your-github/bitbucket-url]
 

@@ -1,7 +1,7 @@
-# Slipstream Laravel Setup Script for Windows
+# Customer Management Laravel Setup Script for Windows
 
 Write-Host "===================================" -ForegroundColor Green
-Write-Host "Slipstream Laravel Setup" -ForegroundColor Green
+Write-Host "Customer Management Laravel Setup" -ForegroundColor Green
 Write-Host "===================================" -ForegroundColor Green
 
 # Check if composer is installed

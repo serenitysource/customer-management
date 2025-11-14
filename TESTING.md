@@ -7,7 +7,7 @@
 
 ```powershell
 # Navigate to project directory
-cd d:\Development\developer_task
+cd d:\Development\customer-management
 
 # Run setup (this will take 3-5 minutes first time)
 .\setup.ps1
@@ -207,9 +207,9 @@ docker-compose ps
 ```
 
 Expected:
-- ✅ slipstream_app: Up (port 8000)
-- ✅ slipstream_db: Up (port 3306)
-- ✅ slipstream_node: Exited (normal after build)
+- ✅ custmgmt_app: Up (port 8000)
+- ✅ custmgmt_db: Up (port 3306)
+- ✅ custmgmt_node: Exited (normal after build)
 
 ### Check Logs
 
@@ -222,7 +222,7 @@ docker-compose logs app
 ### Access Database
 
 ```powershell
-docker-compose exec db mysql -u slipstream_user -pslipstream_password slipstream
+docker-compose exec db mysql -u custmgmt_user -pcustmgmt_password custmgmt
 ```
 
 Run queries:
@@ -321,8 +321,5 @@ docker-compose down -v
 ## Ready for Submission!
 
 If all tests pass ✅, you're ready to:
-1. Create Git repository
-2. Push commits
-3. Submit to Slipstream
 
 See GIT_GUIDE.md for detailed instructions.

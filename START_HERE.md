@@ -2,7 +2,7 @@
 
 ## What Is This?
 
-This is a **complete, production-ready Laravel 11 + Vue.js 3 application** for the Slipstream Developer Assessment. It's a customer and contact management system that runs entirely in Docker containers.
+This is a **complete, production-ready Laravel 11 + Vue.js 3 application** for customer and contact management. It runs entirely in Docker containers.
 
 ## ⚡ Super Quick Start (3 Commands)
 

@@ -54,16 +54,26 @@ Then open: http://localhost:8000
 
 ### Stop the Application
 
-**Windows:**
+**Stop Containers (Keep Data):**
 ```powershell
 docker-compose down
 ```
 
-**Linux/Mac:**
-```bash
-./stop.sh
-# or
-docker-compose down
+**Stop and Remove Volumes (Delete Database Data):**
+```powershell
+docker-compose down -v
+```
+
+**Complete Cleanup (Remove Everything):**
+```powershell
+# Stop containers and remove volumes
+docker-compose down -v
+
+# Remove built images
+docker rmi customer-management-app
+
+# Optional: Clean up all unused Docker resources
+docker system prune -a --volumes
 ```
 
 ### Development Mode (with hot reload)
@@ -119,9 +129,9 @@ docker-compose down -v
 
 All three services run in Docker:
 
-1. **slipstream_app** - Laravel (PHP 8.2) on port 8000
-2. **slipstream_db** - MySQL 8.0 on port 3306  
-3. **slipstream_node** - Node.js 18 for building Vue.js
+1. **custmgmt_app** - Laravel (PHP 8.2) on port 8000
+2. **custmgmt_db** - MySQL 8.0 on port 3306  
+3. **custmgmt_node** - Node.js 18 for building Vue.js
 
 Everything is isolated in containers. Your Windows PC only needs Docker!
 
@@ -149,7 +159,7 @@ docker-compose exec app php artisan migrate
 
 ### Access database directly
 ```powershell
-docker-compose exec db mysql -u slipstream_user -pslipstream_password slipstream
+docker-compose exec db mysql -u custmgmt_user -pcustmgmt_password custmgmt
 ```
 
 ## For Git Repository

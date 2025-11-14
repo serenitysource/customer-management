@@ -18,6 +18,23 @@ Then open: http://localhost:8000
 docker-compose down
 ```
 
+### Stop and Remove Volumes
+```powershell
+docker-compose down -v
+```
+
+### Complete Cleanup (Remove Everything)
+```powershell
+# Stop containers and remove volumes
+docker-compose down -v
+
+# Remove built images
+docker rmi customer-management-app
+
+# Clean up all unused Docker resources (optional)
+docker system prune -a --volumes
+```
+
 ### Development Mode (Hot Reload)
 ```powershell
 .\dev.ps1
@@ -83,7 +100,7 @@ docker-compose exec node npm install package-name
 
 ### Access MySQL
 ```powershell
-docker-compose exec db mysql -u slipstream_user -pslipstream_password slipstream
+docker-compose exec db mysql -u custmgmt_user -pcustmgmt_password custmgmt
 ```
 
 ### Common SQL Queries
@@ -114,12 +131,12 @@ exit;
 
 ### Database Backup
 ```powershell
-docker-compose exec db mysqldump -u slipstream_user -pslipstream_password slipstream > backup.sql
+docker-compose exec db mysqldump -u custmgmt_user -pcustmgmt_password custmgmt > backup.sql
 ```
 
 ### Database Restore
 ```powershell
-docker-compose exec -T db mysql -u slipstream_user -pslipstream_password slipstream < backup.sql
+docker-compose exec -T db mysql -u custmgmt_user -pcustmgmt_password custmgmt < backup.sql
 ```
 
 ## 🔧 Troubleshooting
@@ -166,7 +183,7 @@ docker system prune -a --volumes
 ## 📁 Project Structure
 
 ```
-developer_task/
+customer-management/
 ├── app/
 │   ├── Http/Controllers/    # API controllers
 │   └── Models/              # Eloquent models
@@ -197,9 +214,9 @@ developer_task/
 ### Database
 - **Host**: db (inside Docker) or localhost (from Windows)
 - **Port**: 3306
-- **Database**: slipstream
-- **Username**: slipstream_user
-- **Password**: slipstream_password
+- **Database**: custmgmt
+- **Username**: custmgmt_user
+- **Password**: custmgmt_password
 
 ## 📝 API Endpoints
 
@@ -259,9 +276,9 @@ git push -u origin main
 docker-compose ps
 
 # Should show:
-# slipstream_app  -> Up
-# slipstream_db   -> Up  
-# slipstream_node -> Exited (normal)
+# custmgmt_app  -> Up
+# custmgmt_db   -> Up  
+# custmgmt_node -> Exited (normal)
 ```
 
 ## 🆘 Getting Help

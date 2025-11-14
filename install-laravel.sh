@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "==================================="
-echo "Slipstream Laravel Setup"
+echo "Customer Management Laravel Setup"
 echo "==================================="
 
 # Install Laravel

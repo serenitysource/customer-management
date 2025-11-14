@@ -32,9 +32,17 @@ COPY --chown=www-data:www-data . /var/www
 
 # Create entrypoint script
 RUN echo '#!/bin/sh\n\
-chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache\n\
-chmod -R 775 /var/www/storage /var/www/bootstrap/cache\n\
-su -s /bin/sh www-data -c "php artisan serve --host=0.0.0.0 --port=8000"\n\
+chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache 2>/dev/null || true\n\
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache 2>/dev/null || true\n\
+if [ -f /var/www/vendor/autoload.php ]; then\n\
+  su -s /bin/sh www-data -c "php artisan serve --host=0.0.0.0 --port=8000"\n\
+else\n\
+  echo "Waiting for composer install to complete..."\n\
+  while [ ! -f /var/www/vendor/autoload.php ]; do\n\
+    sleep 2\n\
+  done\n\
+  su -s /bin/sh www-data -c "php artisan serve --host=0.0.0.0 --port=8000"\n\
+fi\n\
 ' > /usr/local/bin/docker-entrypoint.sh && chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Expose port 8000 and start php-fpm server

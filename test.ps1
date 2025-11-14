@@ -20,7 +20,7 @@ if ($containers -match "app" -and $containers -match "db") {
 # Check if database is accessible
 Write-Host ""
 Write-Host "2. Checking database connection..." -ForegroundColor Yellow
-$dbTest = docker-compose exec -T db mysql -u slipstream_user -pslipstream_password -e "SELECT 1" 2>$null
+$dbTest = docker-compose exec -T db mysql -u custmgmt_user -pcustmgmt_password -e "SELECT 1" 2>$null
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "   PASS - Database is accessible" -ForegroundColor Green
@@ -32,7 +32,7 @@ if ($LASTEXITCODE -eq 0) {
 # Check if migrations ran
 Write-Host ""
 Write-Host "3. Checking database tables..." -ForegroundColor Yellow
-$tables = docker-compose exec -T db mysql -u slipstream_user -pslipstream_password slipstream -e "SHOW TABLES" 2>$null
+$tables = docker-compose exec -T db mysql -u custmgmt_user -pcustmgmt_password custmgmt -e "SHOW TABLES" 2>$null
 
 if ($tables -match "customers" -and $tables -match "contacts" -and $tables -match "customer_categories") {
     Write-Host "   PASS - Database tables exist" -ForegroundColor Green
@@ -45,7 +45,7 @@ if ($tables -match "customers" -and $tables -match "contacts" -and $tables -matc
 # Check if categories are seeded
 Write-Host ""
 Write-Host "4. Checking seeded data..." -ForegroundColor Yellow
-$categories = docker-compose exec -T db mysql -u slipstream_user -pslipstream_password slipstream -e "SELECT COUNT(*) as count FROM customer_categories" 2>$null
+$categories = docker-compose exec -T db mysql -u custmgmt_user -pcustmgmt_password custmgmt -e "SELECT COUNT(*) as count FROM customer_categories" 2>$null
 
 if ($categories -match "3") {
     Write-Host "   PASS - Categories are seeded" -ForegroundColor Green

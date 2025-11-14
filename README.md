@@ -1,4 +1,4 @@
-# Slipstream Customer Management System
+# Customer Management System
 
 A Laravel 11 + Vue.js application for managing customers and their contacts.
 
@@ -94,9 +94,9 @@ docker-compose up -d
 ```
 
 This will start three containers:
-- `slipstream_app`: Laravel application (PHP 8.2)
-- `slipstream_db`: MySQL 8.0 database
-- `slipstream_node`: Node.js for Vite dev server
+- `custmgmt_app`: Laravel application (PHP 8.2)
+- `custmgmt_db`: MySQL 8.0 database
+- `custmgmt_node`: Node.js for Vite dev server
 
 #### 4. Install Dependencies (all inside Docker)
 
@@ -181,14 +181,30 @@ The Vite dev server runs on port 5173 inside Docker.
 
 ## Stopping the Application
 
+### Stop Containers (Keep Data)
 ```bash
 docker-compose down
 ```
 
-To also remove volumes (database data):
+### Stop and Remove Volumes (Delete Database Data)
 ```bash
 docker-compose down -v
 ```
+
+### Complete Cleanup (Remove Everything)
+To stop all containers, remove volumes, and delete built images:
+```bash
+# Stop containers and remove volumes
+docker-compose down -v
+
+# Remove the built images
+docker rmi customer-management-app
+
+# Optional: Clean up all unused Docker resources
+docker system prune -a --volumes
+```
+
+**Warning:** The complete cleanup will delete all data and require rebuilding images on next setup.
 
 ## Database Schema
 
@@ -260,13 +276,13 @@ docker-compose exec app php artisan view:clear
 
 # Database commands
 docker-compose exec app php artisan migrate:fresh --seed
-docker-compose exec db mysql -u slipstream_user -pslipstream_password slipstream
+docker-compose exec db mysql -u custmgmt_user -pcustmgmt_password custmgmt
 ```
 
 ## Project Structure
 
 ```
-developer_task/
+customer-management/
 ├── app/
 │   ├── Http/Controllers/
 │   │   ├── CustomerController.php
