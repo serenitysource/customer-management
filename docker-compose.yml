@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slipstream_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - slipstream
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=slipstream
+      - DB_USERNAME=slipstream_user
+      - DB_PASSWORD=slipstream_password
+
+  db:
+    image: mysql:8.0
+    container_name: slipstream_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: slipstream
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: slipstream_user
+      MYSQL_PASSWORD: slipstream_password
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - slipstream
+    ports:
+      - "3306:3306"
+
+  node:
+    image: node:18-alpine
+    container_name: slipstream_node
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - slipstream
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "5173:5173"
+
+networks:
+  slipstream:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
