@@ -4,7 +4,7 @@
       <!-- Modal Header -->
       <div class="flex justify-between items-center pb-3 border-b">
         <h3 class="text-lg font-semibold text-gray-900">
-          {{ isEdit ? 'Edit Contact' : 'Add Contact' }}
+          {{ isEdit  ? 'Edit Contact' : 'Add Contact' }}
         </h3>
         <button @click="$emit('close')" class="text-gray-400 hover:text-gray-600">
           <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -7,6 +7,7 @@ use App\Models\CustomerCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+# CustomerController
 class CustomerController extends Controller
 {
     /**
