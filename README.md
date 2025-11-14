@@ -76,7 +76,18 @@ docker run --rm -v ${PWD}:/app -w /app composer:latest create-project laravel/la
 # Then move files from temp-laravel to current directory and delete temp-laravel
 ```
 
-#### 2. Start Docker Containers
+#### 2. Create Environment File
+
+**IMPORTANT:** Before starting Docker, you must create the `.env` file:
+
+```powershell
+# Copy the example environment file
+cp .env.example .env
+```
+
+This file contains essential configuration for the application to run.
+
+#### 3. Start Docker Containers
 
 ```powershell
 docker-compose up -d
@@ -87,7 +98,7 @@ This will start three containers:
 - `slipstream_db`: MySQL 8.0 database
 - `slipstream_node`: Node.js for Vite dev server
 
-#### 3. Install Dependencies (all inside Docker)
+#### 4. Install Dependencies (all inside Docker)
 
 ```powershell
 # Install PHP dependencies inside Docker
@@ -97,17 +108,14 @@ docker-compose exec app composer install
 docker-compose exec node npm install
 ```
 
-#### 4. Setup Environment
+#### 5. Setup Environment
 
 ```powershell
-# Copy environment file
-docker-compose exec app cp .env.example .env
-
 # Generate application key
 docker-compose exec app php artisan key:generate
 ```
 
-#### 5. Setup Database
+#### 6. Setup Database
 
 ```powershell
 # Run migrations
@@ -117,7 +125,7 @@ docker-compose exec app php artisan migrate
 docker-compose exec app php artisan db:seed
 ```
 
-#### 6. Build Frontend Assets
+#### 7. Build Frontend Assets
 
 ```powershell
 # Build Vite assets inside Docker
