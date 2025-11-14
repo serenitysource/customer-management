@@ -2,15 +2,7 @@
 
 A Laravel 11 + Vue.js application for managing customers and their contacts.
 
-> **🚀 Quick Start**: Run `.\setup.ps1` in PowerShell, then open http://localhost:8000
-
-## 📚 Documentation
-
-- **[SETUP.md](SETUP.md)** - Complete setup instructions (start here!)
-- **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Command reference card
-- **[TESTING.md](TESTING.md)** - Testing checklist
-- **[GIT_GUIDE.md](GIT_GUIDE.md)** - Git and submission guide
-- **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)** - Project overview
+> **Quick Start**: Run `.\setup.ps1` in PowerShell, then open http://localhost:8000
 
 ## Features
 

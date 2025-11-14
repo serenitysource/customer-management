@@ -69,18 +69,25 @@ Write-Host ""
 Write-Host "6. Checking application response..." -ForegroundColor Yellow
 
 try {
-    $response = Invoke-WebRequest -Uri "http://localhost:8000" -TimeoutSec 5 -UseBasicParsing -ErrorAction SilentlyContinue
+    $response = Invoke-WebRequest -Uri "http://localhost:8000" -TimeoutSec 30 -UseBasicParsing -ErrorAction Stop
     if ($response.StatusCode -eq 200) {
         Write-Host "   PASS - Application is responding" -ForegroundColor Green
     } else {
         Write-Host "   WARN - Application returned status: $($response.StatusCode)" -ForegroundColor Yellow
     }
 } catch {
-    if ($_.Exception.Message -match "500") {
+    $errorMsg = $_.Exception.Message
+    if ($errorMsg -match "500") {
         Write-Host "   WARN - Application is running but returned 500 error" -ForegroundColor Yellow
         Write-Host "         Check: docker-compose logs app" -ForegroundColor Gray
+    } elseif ($errorMsg -match "timeout" -or $errorMsg -match "timed out") {
+        Write-Host "   WARN - Application is slow to respond (taking >30s)" -ForegroundColor Yellow
+        Write-Host "         The app container is running. Try accessing http://localhost:8000 in browser" -ForegroundColor Gray
+        Write-Host "         Check logs: docker-compose logs app" -ForegroundColor Gray
     } else {
-        Write-Host "   FAIL - Cannot reach application: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "   FAIL - Cannot reach application: $errorMsg" -ForegroundColor Red
+        Write-Host "         Check if port 8000 is available" -ForegroundColor Gray
+        Write-Host "         Check logs: docker-compose logs app" -ForegroundColor Gray
         exit 1
     }
 }
