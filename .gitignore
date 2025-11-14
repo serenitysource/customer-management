@@ -19,3 +19,4 @@ yarn-error.log
 /.vscode
 pdf_contents.txt
 *.pdf
+vite.config.js.timestamp-*.mjs
