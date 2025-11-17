@@ -1,5 +1,6 @@
 # Docker-Based Setup Guide
-# All commands run inside Docker containers - no local installations needed!
+# All commands run inside Docker containers
+# no local installations needed!
 
 Write-Host "===================================" -ForegroundColor Green
 Write-Host "Customer Management Docker Setup" -ForegroundColor Green

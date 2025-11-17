@@ -12,10 +12,26 @@ class CustomerCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ['Gold', 'Silver', 'Bronze'];
+        $categories = [
+            [
+                'name' => 'Gold',
+                'description' => 'Premium tier customers with highest priority service and exclusive benefits'
+            ],
+            [
+                'name' => 'Silver',
+                'description' => 'Standard tier customers with regular service and standard benefits'
+            ],
+            [
+                'name' => 'Bronze',
+                'description' => 'Basic tier customers with essential service and basic benefits'
+            ],
+        ];
 
         foreach ($categories as $category) {
-            CustomerCategory::firstOrCreate(['name' => $category]);
+            CustomerCategory::updateOrCreate(
+                ['name' => $category['name']],
+                ['description' => $category['description']]
+            );
         }
     }
 }

@@ -22,9 +22,10 @@
             <select
               v-model="categoryFilter"
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              :title="getCategoryDescription(categoryFilter)"
             >
               <option value="">All Categories</option>
-              <option v-for="category in categories" :key="category.id" :value="category.id">
+              <option v-for="category in categories" :key="category.id" :value="category.id" :title="category.description || 'No description'">
                 {{ category.name }}
               </option>
             </select>
@@ -72,10 +73,13 @@
             <tr v-else v-for="customer in filteredCustomers" :key="customer.id" class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ customer.name }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ customer.reference }}</td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span :class="getCategoryBadgeClass(customer.category?.name)" class="px-2 py-1 text-xs font-semibold rounded-full">
+              <td class="px-6 py-4">
+                <span :class="getCategoryBadgeClass(customer.category?.name)" class="px-2 py-1 text-xs font-semibold rounded-full" :title="customer.category?.description || 'No description'">
                   {{ customer.category?.name }}
                 </span>
+                <div v-if="customer.category?.description" class="text-xs text-gray-500 mt-1">
+                  {{ customer.category.description }}
+                </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ customer.contacts?.length || 0 }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
@@ -247,6 +251,11 @@ const getCategoryBadgeClass = (categoryName) => {
     'Bronze': 'bg-orange-100 text-orange-800',
   };
   return classes[categoryName] || 'bg-gray-100 text-gray-800';
+};
+
+const getCategoryDescription = (categoryId) => {
+  const category = categories.value.find(c => c.id === categoryId);
+  return category?.description || 'No description';
 };
 
 onMounted(() => {

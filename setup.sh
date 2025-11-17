@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Docker-Based Setup Guide
-# All commands run inside Docker containers - no local installations needed!
+# All commands run inside Docker containers
+# no local installations needed!
 
 echo "==================================="
 echo "Customer Management Docker Setup"
